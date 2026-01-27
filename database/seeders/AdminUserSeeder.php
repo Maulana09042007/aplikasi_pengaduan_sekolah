@@ -11,8 +11,8 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate(
-            ['username' => 'admin'], // cek berdasarkan username
-            ['password' => Hash::make('admin123')] // update atau insert
+            ['username' => 'admin'],
+            ['password' => Hash::make('admin123')]
         );
     }
 }
