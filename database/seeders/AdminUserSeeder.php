@@ -10,9 +10,9 @@ class AdminUserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
-            'username' => 'admin',
-            'password' => Hash::make('admin123'),
-        ]);
+        User::updateOrCreate(
+            ['username' => 'admin'], // cek berdasarkan username
+            ['password' => Hash::make('admin123')] // update atau insert
+        );
     }
 }

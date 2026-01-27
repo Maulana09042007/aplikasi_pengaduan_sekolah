@@ -26,7 +26,7 @@
         </div>
         <nav class="p-4 space-y-2">
             <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded bg-blue-100 text-blue-700 font-medium">Menu Utama</a>
-            <a href="{{ route('admin.siswa.create') }}" class="block px-4 py-2 rounded hover:bg-gray-100 text-gray-700">Tambah Siswa</a>
+            <a href="{{ route('admin.siswa.create') }}" class="block px-4 py-2 rounded hover:bg-gray-100 text-gray-700">Riwayat</a>
             <a href="{{ route('admin.status.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 text-gray-700">Status</a>
         </nav>
     </aside>
@@ -88,11 +88,7 @@
                         <td class="px-4 py-3">{{ $row->lokasi }}</td>
                         <td class="px-4 py-3 capitalize">{{ $row->status }}</td>
                         <td class="px-4 py-3 flex gap-2">
-                            <a href="{{ route('admin.siswa.update', $row->id) }}" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600" title="Ubah">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 11l6-6 3 3-6 6H9v-3z"/>
-                                </svg>
-                            </a>
+
                             <button onclick="openCard({{ $row->id }})" class="p-2 rounded bg-gray-100 hover:bg-gray-200 text-gray-600" title="Detail">Detail</button>
                         </td>
                     </tr>

@@ -70,15 +70,19 @@ class AspirasiController extends Controller
     }
 
     public function updateFeedback(Request $request, $id)
-    {
-        $request->validate([
-            'feedback_user' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'feedback_admin' => 'required|string',
+    ]);
 
-        $aspirasi = Aspirasi::findOrFail($id);
-        $aspirasi->feedback_user = $request->feedback_user;
-        $aspirasi->save();
+    $aspirasi = Aspirasi::findOrFail($id);
+    $aspirasi->feedback_admin = $request->feedback_admin;
+    $aspirasi->save();
 
-        return response()->json(['success' => true, 'feedback_user' => $aspirasi->feedback_user]);
-    }
+    return response()->json([
+        'success' => true,
+        'feedback_admin' => $aspirasi->feedback_admin
+    ]);
+}
+
 }
