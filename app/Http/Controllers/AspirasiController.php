@@ -14,7 +14,7 @@ class AspirasiController extends Controller
         $kategoris = Kategori::all();
         $aspirasis = collect();
 
-        if ($request->has('nis')) {
+        if ($request->filled('nis')) {
             $aspirasis = Aspirasi::with(['kategori', 'siswa'])
                 ->whereHas('siswa', function ($q) use ($request) {
                     $q->where('nis', $request->nis);
@@ -49,7 +49,7 @@ class AspirasiController extends Controller
             'siswa_id'    => $siswa->id,
             'kategori_id' => $request->kategori_id,
             'lokasi'      => $request->lokasi,
-            'feedback_user' => $request->feedback,
+            'feedback'    => $request->feedback, // ✅ FIX DI SINI
             'status'      => 'Menunggu',
         ]);
 
@@ -66,23 +66,25 @@ class AspirasiController extends Controller
         $aspirasi->status = $request->status;
         $aspirasi->save();
 
-        return response()->json(['success' => true, 'status' => $aspirasi->status]);
+        return response()->json([
+            'success' => true,
+            'status'  => $aspirasi->status
+        ]);
     }
 
     public function updateFeedback(Request $request, $id)
-{
-    $request->validate([
-        'feedback_admin' => 'required|string',
-    ]);
+    {
+        $request->validate([
+            'feedback' => 'required|string',
+        ]);
 
-    $aspirasi = Aspirasi::findOrFail($id);
-    $aspirasi->feedback_admin = $request->feedback_admin;
-    $aspirasi->save();
+        $aspirasi = Aspirasi::findOrFail($id);
+        $aspirasi->feedback = $request->feedback;
+        $aspirasi->save();
 
-    return response()->json([
-        'success' => true,
-        'feedback_admin' => $aspirasi->feedback_admin
-    ]);
-}
-
+        return response()->json([
+            'success'  => true,
+            'feedback' => $aspirasi->feedback
+        ]);
+    }
 }

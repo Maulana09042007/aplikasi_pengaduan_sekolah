@@ -8,7 +8,7 @@ use App\Models\Aspirasi;
 
 class AdminAuthController extends Controller
 {
-    
+
     public function showLogin()
     {
         return view('auth.admin-login');

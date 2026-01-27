@@ -12,14 +12,14 @@ class AspirasiSeeder extends Seeder
     public function run(): void
     {
         $kategoriIds = Kategori::pluck('id')->toArray();
-
-        // HARUS SAMA PERSIS DENGAN ENUM
-        $statusList = ['Menunggu', 'Diproses', 'Selesai'];
+        $statusList = ['Menunggu', 'Proses', 'Selesai'];
 
         for ($i = 1; $i <= 10; $i++) {
 
+            // 1️⃣ NIS dummy
             $nis = '20240' . rand(10, 99);
 
+            // 2️⃣ pastikan siswa ada
             $siswa = Siswa::firstOrCreate(
                 ['nis' => $nis],
                 [
@@ -28,13 +28,13 @@ class AspirasiSeeder extends Seeder
                 ]
             );
 
+            // 3️⃣ simpan aspirasi pakai siswa_id
             Aspirasi::create([
-                'siswa_id'        => $siswa->id,
-                'kategori_id'     => collect($kategoriIds)->random(),
-                'lokasi'          => 'Ruang ' . rand(1, 10),
-                'status'          => collect($statusList)->random(),
-                'feedback_user'   => 'Ini adalah aspirasi dari siswa ' . $nis,
-                'feedback_admin'  => null, // admin belum balas
+                'siswa_id'   => $siswa->id,
+                'kategori_id'=> collect($kategoriIds)->random(),
+                'lokasi'     => 'Ruang ' . rand(1, 10),
+                'status'     => collect($statusList)->random(),
+                'feedback'   => 'Belum ditanggapi',
             ]);
         }
     }

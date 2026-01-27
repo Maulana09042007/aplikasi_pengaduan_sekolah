@@ -6,16 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Form Aspirasi</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
 <div class="bg-white w-full max-w-5xl rounded-lg shadow p-6">
 
     <h1 class="text-2xl font-bold text-center mb-6">
@@ -35,15 +28,39 @@
             <form action="{{ route('aspirasi.store') }}" method="POST" class="space-y-4">
                 @csrf
 
-                <input name="nis" class="w-full border p-2 rounded" placeholder="NIS" required>
+                <input
+                    name="nis"
+                    class="w-full border p-2 rounded"
+                    placeholder="NIS"
+                    required
+                >
 
-                <input name="nama" class="w-full border p-2 rounded" placeholder="Nama" required>
+                <input
+                    name="nama"
+                    class="w-full border p-2 rounded"
+                    placeholder="Nama"
+                    required
+                >
 
-                <input name="kelas" class="w-full border p-2 rounded" placeholder="Kelas" required>
+                <input
+                    name="kelas"
+                    class="w-full border p-2 rounded"
+                    placeholder="Kelas"
+                    required
+                >
 
-                <input name="lokasi" class="w-full border p-2 rounded" placeholder="Lokasi (contoh: Ruang 7)" required>
+                <input
+                    name="lokasi"
+                    class="w-full border p-2 rounded"
+                    placeholder="Lokasi (contoh: Ruang 7)"
+                    required
+                >
 
-                <select name="kategori_id" class="w-full border p-2 rounded" required>
+                <select
+                    name="kategori_id"
+                    class="w-full border p-2 rounded"
+                    required
+                >
                     @foreach($kategoris as $kategori)
                         <option value="{{ $kategori->id }}">
                             {{ $kategori->ket_kategori }}
@@ -51,9 +68,17 @@
                     @endforeach
                 </select>
 
-                <textarea name="feedback" class="w-full border p-2 rounded" placeholder="Isi aspirasi" required></textarea>
+                <input
+                    type="text"
+                    name="feedback"
+                    class="w-full border p-2 rounded"
+                    placeholder="Isi aspirasi"
+                    required
+                ></input>
 
-                <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+                <button
+                    class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                >
                     Kirim Aspirasi
                 </button>
             </form>
@@ -70,9 +95,6 @@
 
     </div>
 </div>
-
-</body>
-</html>
 
 </body>
 </html>
