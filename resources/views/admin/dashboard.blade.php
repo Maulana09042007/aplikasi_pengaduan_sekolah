@@ -138,7 +138,7 @@
             <!-- Filter Section -->
             <div class="bg-white rounded-xl shadow-lg p-4 md:p-6 fade-in" style="animation-delay: 0.4s;">
                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Filter Aspirasi</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+                <div class="grid grid-cols-5 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal</label>
                         <input type="date" id="filter-date" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 transform focus:scale-105">
@@ -154,6 +154,10 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
                         <input type="text" id="filter-kategori" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 transform focus:scale-105" placeholder="Masukkan Kategori">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                        <input type="text" id="filter-status" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 transform focus:scale-105" placeholder="Masukkan Kategori">
                     </div>
                     <div class="flex gap-2 flex-col sm:flex-row">
                         <button onclick="applyFilter()" class="px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 shadow-md font-medium transform hover:scale-105">Filter</button>
@@ -284,18 +288,21 @@
             const nis = document.getElementById('filter-nis').value.toLowerCase();
             const nama = document.getElementById('filter-nama').value.toLowerCase();
             const kategori = document.getElementById('filter-kategori').value.toLowerCase();
+            const status = document.getElementById('filter-status').value.toLowerCase();
 
             document.querySelectorAll('#aspirasi-table tbody tr').forEach(row => {
                 const tglText = row.cells[0].textContent.toLowerCase();
                 const nisText = row.cells[1].textContent.toLowerCase();
                 const namaText = row.cells[2].textContent.toLowerCase();
                 const katText = row.cells[3].textContent.toLowerCase();
+                const staText = row.cells[5].textContent.toLowerCase();
 
                 if (
                     (!date || tglText.includes(date)) &&
                     (!nis || nisText.includes(nis)) &&
                     (!nama || namaText.includes(nama)) &&
-                    (!kategori || katText.includes(kategori))
+                    (!kategori || katText.includes(kategori))&&
+                    (!status || staText.includes(status))
                 ) {
                     row.style.display = '';
                 } else {
@@ -309,6 +316,7 @@
             document.getElementById('filter-nis').value = '';
             document.getElementById('filter-nama').value = '';
             document.getElementById('filter-kategori').value = '';
+            document.getElementById('filter-status').value = '';
             applyFilter();
         }
     </script>
