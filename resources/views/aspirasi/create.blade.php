@@ -25,6 +25,16 @@
                 </div>
             @endif
 
+            @if($errors->any())
+                <ul class = "test-red-500">
+                     
+                        @foreach($errors->all() as $error)
+
+                      <li>{{$error}}</li>
+                        @endforeach
+                     
+                </ul>
+            @endif
             <form action="{{ route('aspirasi.store') }}" method="POST" class="space-y-4">
                 @csrf
 

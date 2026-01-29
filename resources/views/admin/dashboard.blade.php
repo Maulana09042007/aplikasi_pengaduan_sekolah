@@ -84,8 +84,8 @@
             </div>
             <nav class="p-4 space-y-1">
                 <a href="{{ route('admin.dashboard') }}" class="block px-4 py-3 rounded-lg bg-blue-100 text-blue-700 font-medium hover:bg-blue-200 transition duration-200 shadow-sm transform hover:scale-105">🏠 Menu Utama</a>
-                <a href="{{ route('admin.siswa.create') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition duration-200 transform hover:translate-x-1">📜 Riwayat</a>
-                <a href="{{ route('admin.status.index') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition duration-200 transform hover:translate-x-1">📊 Status</a>
+                <!-- <a href="{{ route('admin.siswa.create') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition duration-200 transform hover:translate-x-1">📜 Riwayat</a> -->
+                <!-- <a href="{{ route('admin.status.index') }}" class="block px-4 py-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition duration-200 transform hover:translate-x-1">📊 Status</a> -->
             </nav>
         </aside>
 

@@ -14,7 +14,7 @@ class AspirasiController extends Controller
         $kategoris = Kategori::all();
         $aspirasis = collect();
 
-        if ($request->filled('nis')) {
+        if ($request->has('nis')) {
             $aspirasis = Aspirasi::with(['kategori', 'siswa'])
                 ->whereHas('siswa', function ($q) use ($request) {
                     $q->where('nis', $request->nis);
@@ -29,12 +29,15 @@ class AspirasiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nis'         => 'required|string',
+            'nis'         => 'required|int|min:10|regex:/^[0-9]{10}$/',
             'nama'        => 'required|string',
             'kelas'       => 'required|string',
             'lokasi'      => 'required|string',
             'kategori_id' => 'required|exists:kategoris,id',
             'feedback'    => 'required|string',
+        ],[
+            'nis.integer'=>'Harus Berisi Angka !',
+            'nis.regex'=>'Masukan 10 digit nis anda',
         ]);
 
         $siswa = Siswa::firstOrCreate(
@@ -45,11 +48,11 @@ class AspirasiController extends Controller
             ]
         );
 
-        Aspirasi::create([
+        $buatAspirasi =  Aspirasi::create([
             'siswa_id'    => $siswa->id,
             'kategori_id' => $request->kategori_id,
             'lokasi'      => $request->lokasi,
-            'feedback'    => $request->feedback, // ✅ FIX DI SINI
+            'feedback' => $request->feedback,
             'status'      => 'Menunggu',
         ]);
 
@@ -66,25 +69,19 @@ class AspirasiController extends Controller
         $aspirasi->status = $request->status;
         $aspirasi->save();
 
-        return response()->json([
-            'success' => true,
-            'status'  => $aspirasi->status
-        ]);
+        return response()->json(['success' => true, 'status' => $aspirasi->status]);
     }
 
     public function updateFeedback(Request $request, $id)
     {
         $request->validate([
-            'feedback' => 'required|string',
+            'feedback_user' => 'required|string',
         ]);
 
         $aspirasi = Aspirasi::findOrFail($id);
-        $aspirasi->feedback = $request->feedback;
+        $aspirasi->feedback_user = $request->feedback_user;
         $aspirasi->save();
 
-        return response()->json([
-            'success'  => true,
-            'feedback' => $aspirasi->feedback
-        ]);
+        return response()->json(['success' => true, 'feedback_user' => $aspirasi->feedback_user]);
     }
 }

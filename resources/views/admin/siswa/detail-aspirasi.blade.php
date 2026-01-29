@@ -20,13 +20,13 @@
             <label class="block font-semibold mb-1">Feedback User:</label>
             <textarea class="w-full border rounded p-2 bg-gray-100" readonly>{{ $aspirasi->feedback ?? 'Error' }}</textarea>
         </div>
-        <form onsubmit="sendFeedback(event, {{ $aspirasi->id }})" class="mt-4">
+        <!-- <form onsubmit="sendFeedback(event, {{ $aspirasi->id }})" class="mt-4">
             <label for="feedback-{{ $aspirasi->id }}" class="block font-semibold mb-1">Feedback Admin :</label>
             <textarea id="feedback-{{ $aspirasi->id }}" class="w-full border rounded p-2" placeholder="Tulis feedback..."></textarea>
             <div class="mt-2 text-center">
                 <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700">Kirim Feedback</button>
             </div>
-        </form>
+        </form> -->
         <div class="mt-4 text-center">
             <button onclick="closeCard()" class="px-6 py-2 bg-gray-300 text-gray-800 rounded-full hover:bg-gray-400">Tutup</button>
         </div>

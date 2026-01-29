@@ -33,7 +33,6 @@ class AspirasiSeeder extends Seeder
                 'siswa_id'   => $siswa->id,
                 'kategori_id'=> collect($kategoriIds)->random(),
                 'lokasi'     => 'Ruang ' . rand(1, 10),
-                'ket'        => 'Aspirasi dummy ke-' . $i,
                 'status'     => collect($statusList)->random(),
                 'feedback'   => 'Belum ditanggapi',
             ]);

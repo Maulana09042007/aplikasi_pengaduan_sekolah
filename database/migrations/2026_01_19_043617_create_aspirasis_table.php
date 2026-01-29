@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->foreignId('kategori_id')->constrained('kategoris');
             $table->string('lokasi', 50);
             $table->string('status', 20)->default('Menunggu');
-            $table->string('feedback', 255)->nullable();
+            $table->string('feedback', 255);
             $table->timestamps();
         });
     }
