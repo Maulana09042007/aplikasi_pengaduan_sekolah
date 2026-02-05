@@ -34,7 +34,7 @@ class AspirasiSeeder extends Seeder
                 'kategori_id'=> collect($kategoriIds)->random(),
                 'lokasi'     => 'Ruang ' . rand(1, 10),
                 'status'     => collect($statusList)->random(),
-                'feedback'   => 'Belum ditanggapi',
+                'feedback'   => 'tolong benarkan',
             ]);
         }
     }

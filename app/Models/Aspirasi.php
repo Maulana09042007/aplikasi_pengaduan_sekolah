@@ -11,7 +11,9 @@ class Aspirasi extends Model
         'kategori_id',
         'lokasi',
         'feedback',
-        'status'
+        'status',
+        'feedback_admin',
+        'tanggal_estimasi',
     ];
 
     public function kategori()

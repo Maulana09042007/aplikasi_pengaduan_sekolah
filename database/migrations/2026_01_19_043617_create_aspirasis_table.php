@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->string('lokasi', 50);
             $table->string('status', 20)->default('Menunggu');
             $table->string('feedback', 255);
+            $table->string('feedback_admin', 255)->nullable();
+            $table->date('tanggal_estimasi')->nullable();
             $table->timestamps();
         });
     }

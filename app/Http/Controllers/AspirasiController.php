@@ -35,6 +35,7 @@ class AspirasiController extends Controller
             'lokasi'      => 'required|string',
             'kategori_id' => 'required|exists:kategoris,id',
             'feedback'    => 'required|string',
+            'feedback_admin'  => 'string|nullable',
         ],[
             'nis.integer'=>'Harus Berisi Angka !',
             'nis.regex'=>'Masukan 10 digit nis anda',
@@ -48,40 +49,62 @@ class AspirasiController extends Controller
             ]
         );
 
-        $buatAspirasi =  Aspirasi::create([
-            'siswa_id'    => $siswa->id,
-            'kategori_id' => $request->kategori_id,
-            'lokasi'      => $request->lokasi,
-            'feedback' => $request->feedback,
-            'status'      => 'Menunggu',
+        $buatAspirasi = Aspirasi::create([
+            'siswa_id'      => $siswa->id,
+            'kategori_id'   => $request->kategori_id,
+            'lokasi'        => $request->lokasi,
+            'feedback'      => $request->feedback,
+            'feedback_admin'=> $request->feedback_admin ?? null,
+            'status'        => 'Menunggu',
         ]);
 
         return back()->with('success', 'Aspirasi berhasil dikirim');
     }
 
-    public function updateStatus(Request $request, $id)
-    {
-        $request->validate([
-            'status' => 'required|string|in:Menunggu,Diproses,Selesai',
-        ]);
+   public function updateStatus(Request $request, $id)
+{
+    $request->validate([
+        'status' => 'required|string|in:Menunggu,Diproses,Selesai',
+    ]);
 
-        $aspirasi = Aspirasi::findOrFail($id);
-        $aspirasi->status = $request->status;
-        $aspirasi->save();
+    $aspirasi = Aspirasi::findOrFail($id);
+    $aspirasi->status = $request->status;
 
-        return response()->json(['success' => true, 'status' => $aspirasi->status]);
+    if ($request->status === 'Diproses') {
+        $aspirasi->tanggal_estimasi = now()->addDays(100)->format('Y-m-d'); 
+    } else {
+        $aspirasi->tanggal_estimasi = null; 
     }
 
-    public function updateFeedback(Request $request, $id)
+    $aspirasi->save();
+
+    return response()->json([
+        'success' => true,
+        'status' => $aspirasi->status,
+        'tanggal_estimasi' => $aspirasi->tanggal_estimasi
+    ]);
+}
+
+
+    public function updateFeedbackAdmin(Request $request, $id)
     {
         $request->validate([
-            'feedback_user' => 'required|string',
+            'feedback_admin' => 'required|string',
         ]);
 
         $aspirasi = Aspirasi::findOrFail($id);
-        $aspirasi->feedback_user = $request->feedback_user;
+        $aspirasi->feedback_admin = $request->feedback_admin;
         $aspirasi->save();
 
-        return response()->json(['success' => true, 'feedback_user' => $aspirasi->feedback_user]);
+        return response()->json([
+            'success'        => true,
+            'feedback_admin' => $aspirasi->feedback_admin
+        ]);
+    }
+    public function tambahKategori(){
+
+    
+    return view('admin.kategori');
+
     }
 }

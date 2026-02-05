@@ -14,7 +14,6 @@ class KategoriSeeder extends Seeder
             'Kebersihan',
             'Keamanan',
             'Pelayanan Guru',
-            'Lainnya',
         ];
 
         foreach ($data as $item) {

@@ -25,28 +25,37 @@
         <div class="mt-4 overflow-x-auto">
             <table class="w-full text-sm border">
                 <thead class="bg-gray-200">
-                    <tr>
+                    <tr class="text-center">
                         <th class="border p-2">Kategori</th>
                         <th class="border p-2">Lokasi</th>
                         <th class="border p-2">Status</th>
+                        <th class="border p-2">Estimasi</th>
+                        <th class="border p-2">Pesan Admin</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($aspirasis as $aspirasi)
                         <tr class="text-center">
                             <td class="border p-2">
-                                {{ $aspirasi->kategori->ket_kategori }}
+                                {{ $aspirasi->kategori->ket_kategori ?? '-' }}
                             </td>
                             <td class="border p-2">
-                                {{ $aspirasi->lokasi }}
+                                {{ $aspirasi->lokasi ?? '-' }}
                             </td>
-                            <td class="border p-2 font-semibold
+                              <td class="border p-2 font-semibold
                                 @if($aspirasi->status === 'Menunggu') text-yellow-600
-                                @elseif($aspirasi->status === 'Proses') text-blue-600
+                                @elseif($aspirasi->status === 'Diproses') text-blue-600
                                 @else text-green-600
                                 @endif
                             ">
                                 {{ $aspirasi->status }}
+                            </td>
+                            <td class="border p-2">
+                                {{ $aspirasi->tanggal_estimasi ?? '-' }}
+                            </td>
+                          
+                            <td class="border p-2">
+                                <textarea class="w-full border rounded p-2 bg-gray-100 resize-none" readonly>{{ $aspirasi->feedback_admin ?? '-' }}</textarea>
                             </td>
                         </tr>
                     @endforeach

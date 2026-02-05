@@ -48,6 +48,7 @@ class AdminAuthController extends Controller
             'diproses',
             'selesai',
             'aspirasiTerbaru'
+            
         ));
     }
     public function updateStatus(Request $request, $id)

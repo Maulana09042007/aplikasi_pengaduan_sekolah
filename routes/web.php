@@ -24,4 +24,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/status', [AspirasiController::class, 'statusIndex'])->name('admin.status.index');
     Route::post('/admin/status/{id}/update', [AspirasiController::class, 'updateStatus'])->name('admin.status.update');
+
+    Route::post('/admin/feedback/{id}', [AspirasiController::class, 'updateFeedbackAdmin']);
+    Route::post('/admin/status/{id}/update', [AspirasiController::class, 'updateStatus']);
+
+    Route::get('admin/kategori',[AspirasiController::class,'tambahKategori'])->name('admin.kategori');
 });
