@@ -28,5 +28,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/feedback/{id}', [AspirasiController::class, 'updateFeedbackAdmin']);
     Route::post('/admin/status/{id}/update', [AspirasiController::class, 'updateStatus']);
 
-    Route::get('admin/kategori',[AspirasiController::class,'tambahKategori'])->name('admin.kategori');
+    Route::get('admin/kategori',[AspirasiController::class,'kategori'])->name('admin.kategori');
+    Route::post('admin/kategori',[AspirasiController::class,'tambahKategori'])->name('admin.kategori.store');
 });

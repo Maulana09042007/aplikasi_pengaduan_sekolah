@@ -101,10 +101,30 @@ class AspirasiController extends Controller
             'feedback_admin' => $aspirasi->feedback_admin
         ]);
     }
-    public function tambahKategori(){
+    public function kategori(){
+
 
     
     return view('admin.kategori');
 
+
+
+    }
+
+    public function tambahKategori(Request $request){
+
+    $request->validate([
+        'kategori'=>'required|string|max:20'
+    ],
+    [
+        'kategori.max'=>'Tolong isi maximal 20 karakter '
+    ]
+    );
+
+    $buatKategori = Kategori::create([
+        'ket_kategori'=>$request->kategori,
+    ]);
+    
+    
     }
 }
