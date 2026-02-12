@@ -29,7 +29,7 @@ class AspirasiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nis'         => 'required|int|min:10|regex:/^[0-9]{10}$/',
+            'nis'         => 'required|int|min:10',
             'nama'        => 'required|string',
             'kelas'       => 'required|string',
             'lokasi'      => 'required|string',
@@ -37,8 +37,8 @@ class AspirasiController extends Controller
             'feedback'    => 'required|string',
             'feedback_admin'  => 'string|nullable',
         ],[
-            'nis.integer'=>'Harus Berisi Angka !',
-            'nis.regex'=>'Masukan 10 digit nis anda',
+            'nis.integer'=>'Nis Harus Berupa Angka !',
+            'nis.min'=>'Masukan 10 digit nis anda',
         ]);
 
         $siswa = Siswa::firstOrCreate(
@@ -125,6 +125,6 @@ class AspirasiController extends Controller
         'ket_kategori'=>$request->kategori,
     ]);
     
-    
-    }
+    return view('admin.kategori');
+}
 }
