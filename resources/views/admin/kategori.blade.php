@@ -62,6 +62,7 @@
     <!-- Navigation -->
    @include('admin.components.navbar')
 
+
     <div class="flex relative">
 
         <!-- Sidebar -->
@@ -92,6 +93,19 @@
                 </button>
             </form>
 
+            @foreach($dataKategori as $kat)
+            <br>
+            {{ $kat->ket_kategori }}
+             <form action="{{ route('admin.kategori.delete', $kat->id) }}" method="POST" onsubmit="return confirm('Yakin ingin hapus kategori ini?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="bg-red-600 text-white px-2 py-1 rounded">Hapus</button>
+            </form>
+            @endforeach
+
+            @if(session('error'))
+                 error uy
+            @endif
         </div>
     </div>
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Aspirasi;
 use App\Models\Kategori;
 use App\Models\Siswa;
+use Illuminate\Database\QueryException;
 
 class AspirasiController extends Controller
 {
@@ -101,11 +102,11 @@ class AspirasiController extends Controller
             'feedback_admin' => $aspirasi->feedback_admin
         ]);
     }
-    public function kategori(){
+    public function kategori(Request $request){
 
 
-    
-    return view('admin.kategori');
+    $dataKategori = Kategori::all();
+    return view('admin.kategori',compact('dataKategori'));
 
 
 
@@ -125,6 +126,28 @@ class AspirasiController extends Controller
         'ket_kategori'=>$request->kategori,
     ]);
     
-    return view('admin.kategori');
+    return redirect()->route('admin.kategori')->with('success','Berhasil Di tambahkan');
 }
+
+    public function hapus($id){
+
+
+    try{
+
+    
+    $kategori = Kategori::findOrFail($id);
+
+    $kategori->delete();
+
+    return redirect()->route('admin.kategori')->with('success','berhasil');
+
+
+  }
+
+  catch(QueryException ){
+    return redirect()->route('admin.kategori')->with('error','Data masih dipakai');
+  }
+
+    }
+
 }

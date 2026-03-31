@@ -30,4 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('admin/kategori',[AspirasiController::class,'kategori'])->name('admin.kategori');
     Route::post('admin/kategori',[AspirasiController::class,'tambahKategori'])->name('admin.kategori.store');
+
+
+    Route::delete('/admin/kategori/{id}', [AspirasiController::class, 'hapus'])->name('admin.kategori.delete');
 });
